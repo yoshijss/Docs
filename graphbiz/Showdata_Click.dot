@@ -1,0 +1,8 @@
+digraph Func {
+	graph [rankdir = LR, fontname = "Meiryo UI", fontsize = 9];
+
+		Func1 [shape = box, label = "Showdata_Click()"];
+		Func2 [shape = box, label = "SetListSerial()"];
+
+		Func1 -> Func2
+}

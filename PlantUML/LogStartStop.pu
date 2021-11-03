@@ -1,0 +1,34 @@
+@startUML LogStartStop
+left to right direction
+
+frame FrmATE01_System.h {
+    object "Btn_002_Click()" as Btn_002_Click
+    object "Btn_003_Click()" as Btn_003_Click
+    object "FrmATE01_System1_KeyUp()" as FrmATE01_System1_KeyUp
+}
+
+frame Ncat5Gpib.cpp {
+    object "MsgInit()" as MsgInit
+    object "RunTrlist()" as RunTrlist
+    object "StopTrlist()" as StopTrlist
+    object "OpenMsgLog()" as OpenMsgLog
+}
+
+frame Cskensa.cpp {
+    object "step_run()" as step_run
+    object "stepjun()" as stepjun
+    object "rnkensa()" as rnkensa
+}
+
+step_run -right-> MsgInit
+stepjun -right-> MsgInit
+rnkensa -right-> MsgInit
+
+Btn_002_Click -right-> RunTrlist
+Btn_003_Click -right-> RunTrlist
+
+Btn_002_Click -right-> StopTrlist
+Btn_003_Click -right-> StopTrlist
+FrmATE01_System1_KeyUp -right-> StopTrlist
+
+@endUML

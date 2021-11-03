@@ -1,0 +1,97 @@
+@startuml "LogCallTree NCAT5 Function only"
+left to right direction
+
+frame "NCAT5" {
+
+  frame "Ncat5Gpib.cpp" #Orange {
+    object MsgLog
+    object RunTrlist
+    object StopTrlist
+  }
+
+  frame "Datalog.c" #Orange {
+    object msginit
+    object open_msglog
+    object msglog
+    object run_trlist
+    object stop_trlist
+    object trlist
+    object log_t
+    object log_save
+  }
+
+  frame "subsys.c" #Orange {
+    object Ccreatepipe
+    object runthread
+    object Cconnectpipe
+    object Cclosepipe
+    object Csetevent
+    object point_list
+    object Copenpipe
+    object Cwritepipe
+    object Creadpipe
+    object point_com
+    object Cdisconnectpipe
+    object Ccloseevent
+    object Cwaitobject
+    object Ccreateevent
+  }
+
+  frame "ncatif.c" #Orange {
+    object open_msg_gpib
+    object open_msglog_gpib
+  }
+}
+
+' Ncat5Gpib.cppからの呼び出し
+MsgLog -down-> msglog
+RunTrlist -> run_trlist
+StopTrlist -> stop_trlist 
+
+' DataLog.c msginit()からの呼び出し
+msginit -down-> point_list
+
+' DataLog.c open_msglog()からの呼び出し
+open_msglog -left-> open_msg_gpib
+open_msglog -down-> Copenpipe
+
+' DataLog.c msglog()からの呼び出し
+msglog -down-> Cwritepipe
+
+' DataLog.c run_trlist()からの呼び出し
+run_trlist -down-> runthread
+run_trlist -down-> trlist : スレッド登録
+
+' DataLog.c stop_trlist()からの呼び出し
+stop_trlist -down-> Cclosepipe 
+stop_trlist -> open_msglog
+stop_trlist -> msglog
+stop_trlist -left-> open_msglog_gpib
+stop_trlist -down-> Csetevent
+
+' DataLog.c trlist()からの呼び出し
+trlist -down-> Ccreatepipe
+trlist -down-> point_com
+trlist -> msginit
+trlist -down-> runthread
+trlist -down-> Cconnectpipe
+trlist -down-> Cclosepipe
+trlist --> log_t : スレッド登録
+trlist --> log_save : スレッド登録
+
+' DataLog.c log_t()からの呼び出し
+log_t -down-> Creadpipe
+log_t -down-> point_com
+log_t -down-> Csetevent
+log_t -down-> Cdisconnectpipe
+log_t -down-> Cclosepipe
+
+' DataLog.c log_save()からの呼び出し
+log_save -down-> Ccreateevent
+log_save -down-> Cwaitobject
+log_save -down-> Ccloseevent
+
+' subsys.c runthread()からの呼び出し
+runthread -up-> log_save
+
+@enduml

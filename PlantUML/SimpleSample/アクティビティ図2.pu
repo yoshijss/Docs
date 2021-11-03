@@ -1,0 +1,20 @@
+@startuml
+(*) --> "MongoDBから\nデータ検索"
+    if "データ有?" then
+      ---->[true] "戻り値=MongoDBの\n検索データ"
+      ----> "戻り値を返却"
+    else
+      partition OracleDB検索 {
+      -->[false] "OracleDBから\nデータ検索"
+        if "データ有?" then
+          -->[true] "OracleDBの検索データを\nMongoDBに追加"
+          --> "戻り値=OracleDBの\n検索データ"
+          --> "戻り値を返却"
+        else
+          ---->[false] "戻り値=NULL"
+        endif
+    end if
+}
+--> "戻り値を返却"
+--> (*)
+@enduml

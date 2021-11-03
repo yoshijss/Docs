@@ -1,0 +1,50 @@
+@startuml "run_trlist flow"
+partition run_trlist {
+    start
+    :Call runthread() trlist;
+    note right: "trlistをスレッド起動"
+    stop
+}
+partition trlist {
+    start
+    :Call subsys.c put_com();
+    :Call InitializeCriticalSection();
+    :Call msginit();
+    :**runthread() log_save()**;
+    :Call Cconnectpipe();
+
+    repeat
+        :Call Ccreatepipe();
+        if (TRUE?) then
+            :Call Cconnectpipe();
+            if (TRUE?) then
+                :**runthread() log_t()**;
+            else
+            endif
+        else
+            :Call DeleteCriticalSection();
+            stop
+        endif
+    repeat while (Stop2 == 0)
+
+    :Call DeleteCriticalSection();
+    stop
+}
+
+partition log_t {
+    start
+    repeat (Stop==0)
+        :Call Creadpipe();
+            if () then {
+            }
+            endif
+    repeat
+    stop
+}
+
+partition log_save {
+    start
+    stop
+}
+
+@enduml

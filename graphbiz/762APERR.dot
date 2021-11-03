@@ -1,0 +1,29 @@
+digraph node_762APERR {
+
+  //graph settings
+	graph [
+	charset = "UTF-8";
+		label = "node simple",
+		labelloc = "t",
+		labeljust = "c",
+		bgcolor = "#343434",
+		fontcolor = white,
+		fontsize = 18,
+		style = "filled",
+		rankdir = TB,
+		margin = 0.2
+	];
+	// node common settings
+	node [
+		colorscheme = rdylgn11,
+		fontname = "MSゴシック",
+		color = 7,
+		fontsize = 18,
+		fontcolor = 6,
+		fillcolor = 11,
+		margin = 0.2
+	];}
+
+	// node define
+	alpha [shape = box, label = "kensa680.cpp\n", style = "solid,filled"];
+}

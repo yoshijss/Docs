@@ -1,0 +1,1 @@
+dot -Kdot -Tpng sample.dot -ograph_sample.png

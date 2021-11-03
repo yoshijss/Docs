@@ -1,0 +1,183 @@
+@startuml LogCallTree
+left to right direction
+
+frame "NCAT5" {
+
+  frame "Ncat5Gpib.cpp" #Orange {
+    object "MsgLog()" as MsgLog
+    object "RunTrlist()" as RunTrlist
+    object "StopTrlist()" as StopTrlist
+  }
+
+  frame "Datalog.c" #Orange {
+    object "msginit()" as msginit
+    object "open_msglog()" as open_msglog
+    object "msglog()" as msglog
+    object "run_trlist()" as run_trlist
+    object "stop_trlist()" as stop_trlist
+    object "trlist()" as trlist
+    object "log_t()" as log_t
+    object "log_save()" as log_save
+  }
+
+  frame "subsys.c" #Orange {
+    object "Ccreatepipe()" as Ccreatepipe
+    object "runthread()" as runthread
+    object "Cconnectpipe()" as Cconnectpipe
+    object "Cclosepipe()" as Cclosepipe
+    object "Csetevent()" as Csetevent
+    object "point_list()" as point_list
+    object "Copenpipe()" as Copenpipe
+    object "Cwritepipe()" as Cwritepipe
+    object "Creadpipe()" as Creadpipe
+    object "point_com()" as point_com
+    object "Cdisconnectpipe()" as Cdisconnectpipe
+    object "Ccloseevent()" as Ccloseevent
+    object "Cwaitobject()" as Cwaitobject
+    object "Ccreateevent()" as Ccreateevent
+  }
+
+  frame "ncatif.c" #Orange {
+    object "open_msg_gpib()" as open_msg_gpib
+    object "open_msglog_gpib()" as open_msglog_gpib
+  }
+}
+
+frame "Windows API" #Green {
+
+  frame "CriticalSection API" #LightGreen {
+    object "InitializeCriticalSection()" as InitializeCriticalSection
+    object "EnterCriticalSection()" as EnterCriticalSection
+    object "LeaveCriticalSection()" as LeaveCriticalSection
+    object "DeleteCriticalSection()" as DeleteCriticalSection
+  }
+
+  frame "NamedPipe API" #LightGreen {
+    object "CreateNamedPipe()" as CreateNamedPipe
+    object "DisconnectNamedPipe()" as DisconnectNamedPipe
+    object "SetNamedPipeHandleState()" as SetNamedPipeHandleState
+    object "ConnectNamedPipe()" as ConnectNamedPipe
+    object "WaitNamedPipe()" as WaitNamedPipe
+  }
+
+  frame "File API" #LightGreen {
+    object "fopen()" as fopen
+    object "fputs()" as fputs
+    object "fclose()" as fclose
+  }
+
+  object "Sleep()" as Sleep
+  object "SetEvent()" as SetEvent
+  object "SendMessage()" as SendMessage
+  object "WaitForSingleObject()" as WaitForSingleObject
+  object "WriteFile()" as WriteFile
+  object "CreateFile()" as CreateFile
+  object "CreateEvent()" as CreateEvent
+  object "ReadFile()" as ReadFile
+  object "_beginthreadex()" as _beginthreadex
+  object "CloseHandle()" as CloseHandle
+}
+
+' Ncat5Gpib.cppからの呼び出し
+MsgLog -down-> msglog
+RunTrlist -> run_trlist
+StopTrlist -> stop_trlist 
+
+' DataLog.c msginit()からの呼び出し
+msginit -right-> EnterCriticalSection
+msginit -down-> point_list
+msginit -right-> LeaveCriticalSection 
+msginit -right-> SendMessage 
+
+' DataLog.c open_msglog()からの呼び出し
+open_msglog -left-> open_msg_gpib
+open_msglog -down-> Copenpipe
+open_msglog -right-> Sleep
+
+' DataLog.c msglog()からの呼び出し
+msglog -right-> Sleep
+msglog -down-> Cwritepipe
+
+' DataLog.c run_trlist()からの呼び出し
+run_trlist -down-> runthread
+run_trlist -down-> trlist : スレッド登録
+
+' DataLog.c stop_trlist()からの呼び出し
+stop_trlist -down-> Cclosepipe 
+stop_trlist -right-> Sleep
+stop_trlist -> open_msglog
+stop_trlist -> msglog
+stop_trlist -left-> open_msglog_gpib
+stop_trlist -down-> Csetevent
+
+' DataLog.c trlist()からの呼び出し
+trlist -down-> Ccreatepipe
+trlist -down-> point_com
+trlist -right-> InitializeCriticalSection
+trlist -> msginit
+trlist -down-> runthread
+trlist -down-> Cconnectpipe
+trlist -down-> Cclosepipe
+trlist -right-> DeleteCriticalSection
+trlist --> log_t : スレッド登録
+trlist --> log_save : スレッド登録
+
+' DataLog.c log_t()からの呼び出し
+log_t -down-> Creadpipe
+log_t -right-> EnterCriticalSection
+log_t -down-> point_com
+log_t -right-> SendMessage
+log_t -right-> LeaveCriticalSection
+log_t -down-> Csetevent
+log_t -down-> Cdisconnectpipe
+log_t -down-> Cclosepipe
+
+' DataLog.c log_save()からの呼び出し
+log_save -down-> Ccreateevent
+log_save -right-> fopen
+log_save -right-> fputs
+log_save -right-> fclose
+log_save -down-> Cwaitobject
+log_save -down-> Ccloseevent
+
+' subsys.c Ccreatepipe()からの呼び出し
+Ccreatepipe -right-> CreateNamedPipe
+
+' subsys.c runthread()からの呼び出し
+runthread -right-> _beginthreadex
+runthread -right-> CloseHandle
+runthread -up-> log_save
+
+' subsys.c Cconnectpipe()からの呼び出し
+Cconnectpipe -right-> ConnectNamedPipe
+
+' subsys.c Cclosepipe()からの呼び出し
+Cclosepipe -right-> CloseHandle
+
+' subsys.c Csetevent()からの呼び出し
+Csetevent -right-> SetEvent
+
+' subsys.c Copenpipe()からの呼び出し
+Copenpipe -right-> CreateFile
+Copenpipe -right-> SetNamedPipeHandleState
+Copenpipe -right-> WaitNamedPipe
+
+' subsys.c Cwritepipe()からの呼び出し
+Cwritepipe -right-> WriteFile
+
+' subsys.c Creadpipe()からの呼び出し
+Creadpipe -right-> ReadFile
+
+' subsys.c Cdisconnectpipe()からの呼び出し
+Cdisconnectpipe -right-> DisconnectNamedPipe
+
+' subsys.c Ccloseevent()からの呼び出し
+Ccloseevent -right-> CloseHandle
+
+' subsys.c WaitForSingleObject()からの呼び出し
+Cwaitobject -right-> WaitForSingleObject
+
+' subsys.c Ccreateevent()からの呼び出し
+Ccreateevent -right-> CreateEvent
+
+@enduml

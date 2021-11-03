@@ -1,0 +1,38 @@
+@startuml 言語ファイル読み込み構成
+allow_mixing
+top to bottom direction
+
+frame "Ncat5.exe" #Orange {
+
+    frame "言語ファイル読み出し" #Lightblue {
+        object "読み出しバッファ" as ReadBuffer
+    }
+
+    frame "各検査1" #Lightblue {
+
+        object "Log出力準備バッファ" as LogBuffer
+
+    }
+
+    frame "各検査2" #Lightblue {
+
+        object "Log出力準備バッファ" as LogBuffer2
+    }
+
+    frame "ログ出力" #Lightblue {
+
+        object "ログ出力バッファ" as LogOutBuffer
+    }
+}
+
+file "言語ファイル" as Langfile
+file "ログファイル" as Logfile
+
+Langfile -> ReadBuffer : "ファイルから対象文字列を読む"
+ReadBuffer --> LogBuffer : "読み込んだ文字列をバッファに転送"
+ReadBuffer --> LogBuffer2 
+LogBuffer --> LogOutBuffer 
+LogBuffer2 --> LogOutBuffer 
+Logfile <- LogOutBuffer
+
+@enduml

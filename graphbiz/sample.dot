@@ -1,0 +1,35 @@
+digraph node_sample {
+  //graph settings
+  graph [
+    charset = "UTF-8";
+    label = "node simple",
+    labelloc = "t",
+    labeljust = "c",
+    bgcolor = "#343434",
+    fontcolor = white,
+    fontsize = 18,
+    style = "filled",
+    rankdir = TB,
+    margin = 0.2
+  ];
+  // node common settings
+  node [
+    colorscheme = rdylgn11,
+    fontname = "Migu 1M",
+    color = 7,
+    fontsize = 18,
+    fontcolor = 6,
+    fillcolor = 11,
+    margin = 0.2
+  ];
+
+  // node define
+  alpha [shape = box, label = "alpha", style = "solid,filled"];
+  beta [shape = box, label = "beta", style = "dashed,filled"];
+  gamma [shape = box, label = "gamma", style = "dotted,filled"];
+  delta [shape = box, label = "delta", style = "bold,filled"];
+  epsilon [shape = box, label = "epsilon", style = "rounded,filled"];
+  zeta [shape = box, label = "zeta", style = "diagonals,filled"];
+  eta [shape = box, label = "eta", style = "solid,striped" fillcolor = "8:9:10:11"];
+  theta [shape = ellipse, label = "theta", style = "solid,wedged", fillcolor = "8:9:10:11"];
+}

@@ -1,0 +1,40 @@
+@startuml "LogCallTree NamedPipe"
+left to right direction
+
+frame "NCAT5" {
+  frame "DataLog.c" #Orange {
+    object "trlist()" as trlist
+    object "open_msglog()" as open_msglog
+    object "log_t()" as log_t 
+  }
+
+  frame "subsys.c" #Orange {
+    object "Ccreatepipe()" as Ccreatepipe
+    object "Cconnectpipe()" as Cconnectpipe
+    object "Copenpipe()" as Copenpipe
+    object "Cdisconnectpipe()" as Cdisconnectpipe
+  }
+}
+
+frame "NamedPipe API" #LightGreen {
+  object "CreateNamedPipe()" as CreateNamedPipe
+  object "DisconnectNamedPipe()" as DisconnectNamedPipe
+  object "SetNamedPipeHandleState()" as SetNamedPipeHandleState
+  object "ConnectNamedPipe()" as ConnectNamedPipe
+  object "WaitNamedPipe()" as WaitNamedPipe
+}
+
+' NamedPipe API呼出
+Ccreatepipe -down-> CreateNamedPipe
+Cconnectpipe -down-> ConnectNamedPipe
+Copenpipe -down-> SetNamedPipeHandleState
+Copenpipe -down-> WaitNamedPipe
+Cdisconnectpipe -down-> DisconnectNamedPipe
+
+' subsys.c の NamedPipe関連関数呼び出し
+trlist -down-> Ccreatepipe
+trlist -down-> Cconnectpipe
+open_msglog -down-> Copenpipe
+log_t -down-> Cdisconnectpipe
+
+@enduml
