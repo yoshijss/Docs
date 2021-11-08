@@ -71,10 +71,15 @@ Imasugu88@
 
 日経ID
 ito_y@jss1.jp
+Imasugu88@
 
 Lucidchart
 ito_y@jss1.jp
 Togenigiri@8
+
+JMAオンラインサービス
+ito_y@jss1.jp
+Imasugu88
 
 MySQL
 Port 3308
