@@ -9,15 +9,17 @@ def save_frame_camera_key(device_num, dir_path, basename, ext='jpg', delay=1, wi
     if not cap.isOpened():
         return
 
+    ret, frame = cap.read()
+    cv2.imshow(window_name, frame)
+
     os.makedirs(dir_path, exist_ok=True)
     base_path = os.path.join(dir_path, basename)
 
     n = 0
     while True:
-        ret, frame = cap.read()
-        cv2.imshow(window_name, frame)
         key = cv2.waitKey(delay) & 0xFF
         if key == ord('c'):
+            cv2.imshow(window_name, frame)
             print('{}_{}.{}'.format(base_path, n, ext))
             cv2.imwrite('{}_{}.{}'.format(base_path, n, ext), frame)
             n += 1
