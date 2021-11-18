@@ -1,0 +1,17 @@
+@startuml
+
+class CPASImageTransferApp
+
+class CAboutDlg
+
+class CWebcam
+
+class CServerCom
+
+class CErrorLog
+
+class CSettingFile
+
+class GrobalFunction
+
+@enduml

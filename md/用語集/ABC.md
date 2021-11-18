@@ -46,6 +46,9 @@ CC-Linkはマスタ・スレーブ方式のネットワーク。リンクデバ�
   https://www.wingarc.com/product/motionboard/index.html
 
 # O #
+### OEE (Overall Equipment Effectiveness)
+  総合設備効率。稼働率、性能、品質を掛け合わせて算出する。
+
 ### OPC UA (Open Platform Communication Unified Architecture)
   産業オートメーションなどの業界で、安全で信頼性あるデータ交換を行うために策定されたオープンな国際標準規格。OPC Foundationが2008年に発表、その後IEC62541として国際標準化された。
 
