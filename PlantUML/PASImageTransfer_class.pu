@@ -1,17 +1,72 @@
-@startuml
+@startuml PASImageTransferクラス図
 
 class CPASImageTransferApp
+{
+    #各クラスインスタンスのポインタ
+    #InitInstance()
+}
+note right of CPASImageTransferApp
+アプリケーションクラス
+end note
 
 class CAboutDlg
-
-class CWebcam
-
-class CServerCom
+{
+    +DoModal()
+}
+note bottom of CAboutDlg
+バージョン情報の表示機能
+end note
 
 class CErrorLog
+{
+    +AddErrot()
+}
+note bottom of CErrorLog
+エラーログ書き出し機能
+end note
+
+class CWebcam
+{
+    +SaveImage()
+    +RenameImage()
+    +CopyImage()
+}
+note bottom of CWebcam
+カメラから画像取得機能
+end note
 
 class CSettingFile
+{
+    +ReadFile()
+    +GetImageSavePath()
+    +GetSrvIP()
+}
+note bottom of CSettingFile
+設定ファイル読み込み機能
+end note
+
+class CSrvCom
+{
+    +SendData()
+}
+note bottom of CSrvCom
+サーバーとの通信機能
+end note
 
 class GrobalFunction
+{
+    +GetExecFolder()
+    +GetSerialFileName()
+}
+note bottom of GrobalFunction
+共通関数
+end note
+
+CPASImageTransferApp --* CWebcam
+CPASImageTransferApp --* CSettingFile
+CPASImageTransferApp --* CErrorLog
+CPASImageTransferApp --* CAboutDlg
+CPASImageTransferApp --* CSrvCom
+CPASImageTransferApp --* GrobalFunction
 
 @enduml

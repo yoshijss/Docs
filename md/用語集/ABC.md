@@ -95,7 +95,10 @@ CC-Linkはマスタ・スレーブ方式のネットワーク。リンクデバ�
 # U #
 ### UEFI (Unified Extensible Firmware Interface)
   BIOSの代替となる、OSとファームウェア間のインタフェース規格
-  
+
+### UTM (Unified Threat Management)
+  UTMとは、複数の異なるセキュリティ機能を一つのハードウェアに統合し、集中的にネットワーク管理、つまり統合脅威管理を行うこと。
+
 # V #
 ### VUCA (Volatility・Uncertainty・Complexity・Ambiguity)
   社会やビジネスにとって、未来の予測が難しくなる状況のことを意味する。この、Volatility（変動性）・Uncertainty（不確実性）・Complexity（複雑性）・Ambiguity（曖昧性）は、時代の特性を表している。
