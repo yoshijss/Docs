@@ -1,0 +1,13 @@
+@startuml
+
+"BCR" -> "中継PC" : ①BC読み込み
+
+"中継PC" -> "上位PC" : ➁BC読み込み値送信
+
+"上位PC" -> "中継PC" : ③CSV送信
+
+group JSS作成部分
+    "中継PC" -> "PLC" : ④CSV内容、製品情報送信
+end
+
+@enduml
