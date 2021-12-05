@@ -1,0 +1,12 @@
+@startuml PASTrans Sequence
+
+PAS -> ImgTrans  : 起動、シリアル？を渡す
+ImgTrans -> Camera  : 撮影要求
+Camera -> ImgTrans  : 画像
+ImgTrans -> Server : 画像データhttp送信
+Server -> ImgTrans : インデックス(ファイル名)受信
+ImgTrans -> CSVファイル : シリアル、インデックスを保存
+CSVファイル -> ImgTrans
+ImgTrans -> PAS : 終了。制御を戻す
+
+@enduml

@@ -1,0 +1,21 @@
+@startuml SmartGrass
+
+node "声で操作できる" as c1
+
+node "両手が自由" as c2
+
+node "画面を見ながら作業ができる" as c3
+c1 -[thickness=4]-> c3
+c2 -[thickness=4]-> c3
+
+node "作業者の視点が共有できる" as c4
+
+node "データ、指示書を確認しながら保守、\n点検作業ができる" as c5
+c3 -[thickness=4]-> c5
+c4 -[thickness=4]-> c5
+
+node "初心者作業者に熟練者が\n遠隔で指示できる" as c7
+c3 -[thickness=4]-> c7
+c4 -[thickness=4]-> c7
+
+@enduml
