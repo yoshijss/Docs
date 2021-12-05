@@ -81,6 +81,16 @@ JMAオンラインサービス
 ito_y@jss1.jp
 Imasugu88
 
+bitnami
+ito_y@jss1.jp
+Keepon@8
+
+bitnami redmine
+admin
+damndamn
+ito
+Ninomiya7
+
 MySQL
 Port 3308
 X Protocol Port 33080
