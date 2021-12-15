@@ -85,6 +85,10 @@ bitnami
 ito_y@jss1.jp
 Keepon@8
 
+SWITCH SCIENCE
+ito_y@jss1.jp
+Fukki888
+
 bitnami redmine
 admin
 damndamn
