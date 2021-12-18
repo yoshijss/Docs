@@ -23,6 +23,32 @@
 ### /proc
 * /proc/cmdline
   起動オプションが書かれているファイル
+* /proc/sys/kernel/ctrl-alt-del
+  [Ctrl]+[Alt]+[Del]キーの動作設定
+* /proc/sys/kernel/hostname
+  ホスト名
+* /proc/sys/kernel/modprobe
+  modprobeのパス
+* /proc/sys/kernel/hotplug
+  ホットプラグ用のプログラムのパス
+* /proc/sys/kernel/osrelease
+  カーネルバージョン
+* /proc/sys/kernel/ostype
+  OSの種類
+* /proc/sys/kernel/sem
+  セマフォ数
+* /proc/sys/kernel/shmall
+  共有メモリの合計(バイト単位)
+* /proc/sys/kernel/shmmax
+  共有メモリセグメントの最大値(バイト単位)
+* /proc/sys/kernel/shmmni
+  共有メモリセグメントの最大数
+* /proc/sys/kernel/sysrq
+  システム要求キー(Magic SysRq Key)の有効/無効
+* /proc/sys/kernel/threads-max
+  スレッド(プロセス)の最大数
+* /proc/sys/kernel/threads-max
+
 * /proc/version
   システム情報が書かれているファイル
 
