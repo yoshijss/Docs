@@ -1,0 +1,28 @@
+@startuml PASImageTransferユースケース
+
+left to right direction
+!theme spacelab
+Actor PAS 
+
+package PASImageTransfer {
+    usecase Server通信
+    usecase Camera制御
+    usecase CSVファイル管理
+    usecase 設定ファイル管理
+    usecase エラーログ管理
+}
+
+node Server
+node Camera
+file CSVファイル
+file 設定ファイル
+file エラーログ
+
+PAS --> PASImageTransfer : $success("起動")
+Server通信 --> Server
+Camera制御 --> Camera
+CSVファイル管理 --> CSVファイル
+設定ファイル管理 --> 設定ファイル
+エラーログ管理 --> エラーログ
+
+@enduml

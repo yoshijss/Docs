@@ -1,5 +1,5 @@
 @startuml PASImageTransferクラス図
-
+!theme spacelab
 class CPASImageTransferApp
 {
     #各クラスインスタンスのポインタ
@@ -28,8 +28,7 @@ end note
 class CWebcam
 {
     +SaveImage()
-    +RenameImage()
-    +CopyImage()
+    +ShowMovie()
 }
 note bottom of CWebcam
 カメラから画像取得機能
@@ -37,9 +36,8 @@ end note
 
 class CSettingFile
 {
-    +ReadFile()
-    +GetImageSavePath()
-    +GetSrvIP()
+    +各パラメータの取得関数
+    +各パラメータの設定関数
 }
 note bottom of CSettingFile
 設定ファイル読み込み機能
@@ -55,8 +53,11 @@ end note
 
 class GrobalFunction
 {
-    +GetExecFolder()
     +GetSerialFileName()
+    +GetExecFolder()
+    +AddYen()
+    +base64_encode()
+    +AddLine()
 }
 note bottom of GrobalFunction
 共通関数
