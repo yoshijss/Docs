@@ -1,0 +1,8 @@
+DX Server
+コンピュータ名：PC-245
+IP Address：192.168.1.223
+
+リモートデスクトップ接続
+192.168.1.223
+User：PC-245¥dxremote
+Password：Dxremote5

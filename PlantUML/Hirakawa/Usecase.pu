@@ -1,6 +1,6 @@
 @startuml 電気長切断Usecase
 left to right direction
-!theme spacelab
+!theme spacelab-white
 rectangle PC {
     (作業者メンテ)
     (製番メンテ)

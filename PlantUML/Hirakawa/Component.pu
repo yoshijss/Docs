@@ -1,0 +1,28 @@
+@startuml コンポーネント図
+!theme materia
+package "Application" {
+
+}
+
+database "CSV記録" {
+
+    [日時]
+    [品番]
+    [製番]
+    [OK/NG]
+    [数量]
+}
+
+database "CSV設定" {
+
+
+}
+
+database "CSVテーブル" {
+
+    [ユーザー]
+    [製番]
+    [品番]
+}
+
+@enduml
