@@ -23,6 +23,10 @@
 ### /proc
 * /proc/cmdline
   起動オプションが書かれているファイル
+* /proc/sys/fs/file-max
+  ファイルハンドルの最大数
+* /roc/sys/file-nr
+  開かれているファイル数、使用されたファイルハンドルの数、
 * /proc/sys/kernel/ctrl-alt-del
   [Ctrl]+[Alt]+[Del]キーの動作設定
 * /proc/sys/kernel/hostname
@@ -47,8 +51,22 @@
   システム要求キー(Magic SysRq Key)の有効/無効
 * /proc/sys/kernel/threads-max
   スレッド(プロセス)の最大数
-* /proc/sys/kernel/threads-max
-
+* /proc/sys/kernel/version
+  カーネル構築の情報
+* /proc/sys/net/core/rmem_default
+  受信ソケットバッファのデフォルトサイズ
+* /proc/sys/net/core/rmem_max
+  受信ソケットバッファの最大サイズ
+* /proc/sys/net/core/wmem_default
+  送信ソケットバッファのデフォルトサイズ
+* /proc/sys/net/core/wmem_max
+  送信ソケットバッファの最大サイズ
+* /proc/sys/net/ipv4/ip_forward
+  ネットワークインタフェース間でのパケット転送の有効/無効
+* /proc/sys/net/ipv4/icmp_echo_ignore_broadcast
+  ブロードキャスト宛のICMP Echo Requestを無視するかどうか
+* /proc/sys/net/ipv4/icmp_echo_ignore_all
+  すべてのICMP Echo Requestを無視するかどうか
 * /proc/version
   システム情報が書かれているファイル
 
