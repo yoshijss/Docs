@@ -1,0 +1,29 @@
+@startuml
+
+left to right direction
+
+node PC as pc #blue;text:white
+node "ワーク\n(基板)" as work #pink
+pc <--> work
+
+node "CAN\nI/F" as can #blue;text:white
+pc <--> can
+can <--> work
+
+node "LIN\nI/F" as lin #blue;text:white
+pc <--> lin
+lin <--> work
+
+node "LV電源" as lv #blue;text:white
+pc <--> lv
+lv <--> work
+
+node "HV電源" as hv #blue;text:white
+pc <--> hv
+hv <--> work
+
+node "フラッシュ\nプログラマ" as flash #blue;text:white
+pc <--> flash
+flash <--> work
+
+@enduml

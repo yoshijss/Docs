@@ -1,0 +1,13 @@
+@startuml
+
+left to right direction
+
+node PC as pc #blue;text:white
+node "ワーク\n(製品)" as work #pink
+pc <--> work
+
+node "耐電圧\n絶縁抵抗計" as ir #blue;text:white
+pc <--> ir
+ir <--> work
+
+@enduml
