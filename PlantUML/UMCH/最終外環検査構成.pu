@@ -1,0 +1,16 @@
+@startuml 最終外観検査構成
+
+left to right direction
+
+node PC as pc #blue;text:white
+
+
+node "カメラ" as camera #blue;text:white
+pc <--> camera
+
+node "ワーク\n(製品)" as work #pink
+camera --> work : 撮像
+
+note top of pc : 画像解析\n(JSS担当)
+
+@enduml

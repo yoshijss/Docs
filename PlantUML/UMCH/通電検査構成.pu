@@ -22,10 +22,6 @@ node "HV電源" as hv #blue;text:white
 pc <--> hv
 hv <--> work
 
-node "フラッシュ\nプログラマ" as flash #blue;text:white
-pc <--> flash
-flash <--> work
-
 node "負荷器" as reg #blue;text:white
 pc <--> reg
 reg <--> work
