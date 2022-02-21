@@ -1,0 +1,5 @@
+
+
+
+PAS PCに接続されているUSBのデジタルI/O
+https://www.ni.com/ja-jp/support/model.usb-6501.html
