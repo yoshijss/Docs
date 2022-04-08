@@ -12,3 +12,15 @@ Redmine
 damndamn
 ユーザー：ito
 ninomiya
+
+IIS
+Port:3000
+
+Apache24
+Port:4000
+
+PostgreSQL14
+Port:5432
+SuperUser
+ID:postgres
+Password:Urara
