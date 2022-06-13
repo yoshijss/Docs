@@ -1,0 +1,27 @@
+@startuml 次工程アクティビティ
+!pragma useVerticalIf on
+start
+if (OK/NG フラグ) then (OK)
+  if (新規/再投入 フラグ) then (再投入)
+    if (自工程ID = 再投入開始工程) then (NO)
+      goto Seisan
+    else if (自工程ID > 再投入) then (No)
+      goto Seisan
+    else
+      goto All
+    endif
+  else (新規)
+    goto Seisan
+  endif
+else (NG)
+  goto All
+endif
+label Seisan
+:生産;
+label All
+: ログをNASに書き込む;
+: 次工程データ準備;
+: 次工程通信開始 |
+
+stop
+@enduml
